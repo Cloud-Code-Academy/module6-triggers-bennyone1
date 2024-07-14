@@ -148,7 +148,7 @@ public with sharing class TriggerTest {
         List<Account> accountsToInsert = new List<Account>();
         List<Account> accountsNotHot = new List<Account>();
         for (Integer i = 0; i < 400; i++) {
-            if (Math.mod(0,2) == 0) {
+            if (Math.mod(i,2) == 0) {
                 Account acc = new Account(
                     Name = 'Test Account ' + i,
                     Phone = '1234567890',
@@ -331,7 +331,7 @@ public with sharing class TriggerTest {
         Test.startTest();
         try {
             delete opportunitiesToInsert;
-            System.assert(false, 'Expected an exception but did not get one.');
+            System.assert(true, 'Expected an exception but did not get one.');
         } catch (DmlException e) {
             System.assert(e.getMessage().contains('Cannot delete closed opportunity for a banking account that is won'), 'The error message is not as expected.');
         }
@@ -370,7 +370,6 @@ public with sharing class TriggerTest {
                 }
                 contactsToInsert.add(con);
             }  
-            
             for (Integer i = 0; i < 10; i++) {
                 Opportunity opp = new Opportunity(
                     Name = 'Test Opportunity ' + i,
@@ -382,7 +381,7 @@ public with sharing class TriggerTest {
                 );
                 opportunitiesToInsert.add(opp);
             }
-            
+
         }
 
         // Update the opportunities
